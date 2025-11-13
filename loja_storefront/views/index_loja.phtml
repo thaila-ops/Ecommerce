@@ -1,0 +1,56 @@
+<?php
+// VISÃO (View)
+// Página da Loja.
+// A variável $produtos vem do LojaController.
+?>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa Loja</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+<?php include 'includes/navbar.phtml'; ?>
+
+    <div class="container-loja">
+        <main class="grid-produtos">
+            
+            <?php
+            if (!empty($produtos)) {
+                // Loop para exibir os dados recebidos do controller
+                foreach ($produtos as $row) {
+                    
+                    // Define o caminho da imagem.
+                    // O script executado é o index.php (roteador),
+                    // então o caminho é relativo a ele.
+                    // ../uploads/
+                    $caminho_imagem = "../uploads/" . htmlspecialchars($row['imagem_nome']);
+
+                    echo '<div class="card-produto">';
+                    
+                    if (file_exists($caminho_imagem) && !empty($row['imagem_nome'])) {
+                        echo '<img src="' . $caminho_imagem . '" alt="' . htmlspecialchars($row['nome']) . '">';
+                    } else {
+                        echo '<img src="https://placehold.co/400x300?text=Sem+Imagem" alt="Sem imagem">';
+                    }
+                    
+                    echo '<div class="card-body">';
+                    echo '<span class="categoria">' . htmlspecialchars($row['categoria_nome']) . '</span>';
+                    echo '<h2>' . htmlspecialchars($row['nome']) . '</h2>';
+                    echo '<p class="descricao">' . htmlspecialchars($row['descricao']) . '</p>';
+                    echo '<p class="preco">R$ ' . number_format($row['preco'], 2, ',', '.') . '</p>';
+                    echo '</div>'; // fim .card-body
+                    echo '</div>'; // fim .card-produto
+                }
+            } else {
+                echo "<p>Nenhum produto encontrado!</p>";
+            }
+            ?>
+            
+        </main>
+    </div>
+</body>
+</html>
