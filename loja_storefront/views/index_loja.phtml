@@ -5,24 +5,59 @@
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nossa Loja</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
     
-<?php include 'includes/navbar.phtml'; ?>
 
-    <div class="container-loja">
+
+</head>
+
+<body>
+
+    <?php include 'includes/navbar.phtml'; ?>
+
+<h2 class="titulo-doceria">Doceria Alquimia III</h2>
+
+       <section class="secao-doce">
+    <div class="conteudo-texto">
+        <p class="versiculo">
+            Assim como está escrito em Provérbios 16:24: 
+            <em>"Palavras agradáveis são como favo de mel, doces para a alma e medicina para o corpo."</em>
+        </p>
+
+        <p>
+            Foi com essa inspiração que nossa jornada começou. Cada doce que produzimos carrega
+            carinho, dedicação e gratidão. Acreditamos que sabores também transmitem amor — e nosso
+            desejo é que cada mordida leve até você um pedacinho de doçura, conforto e alegria.
+        </p>
+
+        <p>
+            Que nossos doces aqueçam o seu dia e toquem suavemente o seu coração, assim como a Palavra
+            de Deus toca o nosso todos os dias.
+        </p>
+    </div>
+
+    <div class="conteudo-imagem">
+        <img src="../Imagens_Teste/image-1.png" alt="Doce da Alquimia III">
+    </div>
+</section>
+ <div class="container-loja">
         <main class="grid-produtos">
-            
+
             <?php
             if (!empty($produtos)) {
                 // Loop para exibir os dados recebidos do controller
                 foreach ($produtos as $row) {
-                    
+
                     // Define o caminho da imagem.
                     // O script executado é o index.php (roteador),
                     // então o caminho é relativo a ele.
@@ -30,13 +65,13 @@
                     $caminho_imagem = "../uploads/" . htmlspecialchars($row['imagem_nome']);
 
                     echo '<div class="card-produto">';
-                    
+
                     if (file_exists($caminho_imagem) && !empty($row['imagem_nome'])) {
                         echo '<img src="' . $caminho_imagem . '" alt="' . htmlspecialchars($row['nome']) . '">';
                     } else {
                         echo '<img src="https://placehold.co/400x300?text=Sem+Imagem" alt="Sem imagem">';
                     }
-                    
+
                     echo '<div class="card-body">';
                     echo '<span class="categoria">' . htmlspecialchars($row['categoria_nome']) . '</span>';
                     echo '<h2>' . htmlspecialchars($row['nome']) . '</h2>';
@@ -49,8 +84,56 @@
                 echo "<p>Nenhum produto encontrado!</p>";
             }
             ?>
-            
+
+
+
         </main>
+       
+        
+    
+ <section class="secao-doce">
+    <div class="conteudo-texto">
+        <div class="imagem">
+        <img src="../Imagens_Teste/Imagem do WhatsApp de 2025-11-13 à(s) 22.18.57_d103775a.jpg"  alt="equipe da alquimia">
+        </div>
+
+        <p class="versiculo">
+           
+            <em>" Quem Somos — Doceria Alquimia III"</em>
+        </p>
+        
+        
+  <p>
+            Na Alquimia III, acreditamos que cada doce carrega uma história — e a nossa começou
+            com três corações apaixonados pelo sabor e pelo cuidado.
+        </p>
+
+        <p>
+            Sou eu, <strong>Thaila</strong>, a sonhadora que sempre acreditou que a confeitaria é uma forma de amor em forma de detalhe.
+            Junto comigo estão <strong>Pablo</strong> e <strong>Alisson</strong>, dois parceiros incríveis que transformaram esse sonho
+            em equipe, equilíbrio e criatividade.
+        </p>
+
+        <p>
+            Somos três, mas trabalhamos com um só propósito:
+            <strong>deixar o dia das pessoas mais doce</strong>, seja com um brigadeiro artesanal,
+            um bolo feito com carinho ou uma sobremesa que abraça a alma.
+        </p>
+
+        <p>
+            Cada receita nasce do nosso compromisso com qualidade, beleza e afeto — porque, para nós,
+            cozinhar é misturar ingredientes, mas também é misturar histórias, momentos e sorrisos.
+        </p>
     </div>
+
+    
+</section>
+   
+
+    
+    <?php include 'includes/footer.phtml'; ?>
+    
+
 </body>
+
 </html>
