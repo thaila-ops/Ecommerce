@@ -1,0 +1,497 @@
+/* CSS Básico para a Loja */
+/* Este arquivo é idêntico ao anterior */
+/* ============================
+   ESTILO GLOBAL
+   ============================ */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Playfair Display", serif;
+    background-color: #f8f1eb; /* bege claro delicado */
+    color: #4a1600;
+}
+
+
+/* ============================
+   HEADER
+   ============================ */
+header {
+    background-color: #f8f1eb;
+    padding: 25px;
+    text-align: center;
+    border-bottom: 3px solid #c58a63;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.4rem;
+    color: #4a1600;
+    letter-spacing: 2px;
+}
+
+
+/* ============================
+   CONTAINER DA LOJA
+   ============================ */
+.container-loja {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 15px;
+}
+
+
+/* ============================
+   GRID DE PRODUTOS
+   ============================ */
+.grid-produtos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 25px;
+}
+
+
+/* ============================
+   CARD DO PRODUTO
+   ============================ */
+.card-produto {
+    background-color: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-direction: column;
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* efeito hover elegante */
+.card-produto:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* imagem */
+.card-produto img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-bottom: 2px solid #f1d7c8;
+}
+
+
+/* ============================
+   CORPO DO CARD
+   ============================ */
+.card-body {
+    padding: 20px 22px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* categoria */
+.card-body .categoria {
+    font-size: 0.75rem;
+    color: #6b3a23;
+
+    background-color: #f3e1d6;
+    padding: 5px 10px;
+    border-radius: 20px;
+
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+/* título */
+.card-body h2 {
+    font-size: 1.45rem;
+    color: #4a1600;
+    margin: 0 0 10px 0;
+}
+
+/* descrição */
+.card-body .descricao {
+    font-size: 0.95rem;
+    color: #6b3a23;
+    flex-grow: 1;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+/* preço */
+.card-body .preco {
+    font-size: 1.6rem;
+    font-weight: bold;
+
+    background: linear-gradient(90deg, #c58a63, #8a4a23);
+    -webkit-background-clip: text;
+    color: transparent;
+
+    align-self: flex-end;
+}
+
+
+/* ============================
+   ERRO BANCO
+   ============================ */
+.erro-db {
+    color: #d8000c;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+
+/* Estilos da Barra de Navegação */
+.navbar {
+    background-color: #ffffff;
+    /* Fundo branco */
+   box-shadow: 0 8px 10px rgb(253, 253, 253);
+    /* Sombra suave */
+    padding: 0 1.5rem;
+    /* Espaçamento nas laterais */
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.navbar-container {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    /* Itens nas pontas */
+    align-items: center;
+    /* Centraliza verticalmente */
+    max-width: 1200px;
+    /* Largura máxima do conteúdo */
+    margin: 0 auto;
+    /* Centraliza na página */
+    height: 120px;
+    /* Altura fixa */
+}
+
+/* Estilos do Logo */
+.logo-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    /* Remove sublinhado do link */
+}
+
+.logo-img {
+    height: 110px;
+    /* Altura do logo */
+    width: 110px;
+    /* Largura do logo */
+    /* Usa 50% para ser perfeitamente redondo */
+    border-radius: 30%;
+    object-fit: cover;
+    /* Garante que a imagem preencha */
+}
+
+/* Links de Navegação (Desktop) */
+.nav-links {
+    list-style: none;
+    /* Remove bolinhas */
+    display: flex;
+    gap: 1.5rem;
+    /* Espaço entre os links */
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #4a1600;
+    /* Cor do texto escura */
+    font-weight: 510;
+    font-size: 24px;
+    padding: 15px 20px;
+    border-radius: 6px;
+    /* Transição suave para o hover */
+    transition: 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+    /* Fundo leve no hover */
+    color: #91491c;
+    /* Cor do texto mais escura no hover */
+    font-size: 30px;
+    text-decoration: none;
+}
+
+/* Ícone de Menu (Hamburger) - Escondido por padrão */
+.menu-icon {
+    display: none;
+    /* Escondido em telas grandes */
+    cursor: pointer;
+}
+
+.menu-icon .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    /* Cor das barras */
+    margin: 5px 0;
+    transition: 0.4s;
+}
+
+.titulo-doceria {
+    font-family: "Playfair Display", serif;
+    font-size: 2.6rem;
+    color: #4a1600;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 30px !important;
+    /* espaçamento entre letras */
+   
+    /* espaço embaixo */
+    text-align: center;
+}
+
+
+.secao-1 {
+    position: relative;
+    width: 100%;
+    min-height: 610px;
+
+    background-image: url("../Imagens_Teste/ChatGPTImage14_11_2025,23_53_55.png");
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.3);
+
+    padding: 20px 2%;
+    color: #fff;
+
+    /* 🎨 Máscara apenas no rodapé da imagem */
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 30%);
+    mask-image: linear-gradient(to top, transparent 0%, black 30%);
+
+
+
+
+.conteudo-texto {
+    position: relative;
+    /* sobe para cima da imagem e do overlay */
+    z-index: 2;
+    max-width: 630px;
+    font-family: "Playfair Display", serif;
+}
+
+.conteudo-texto p {
+    font-size: 1.3rem !important;
+    line-height: 1.8 !important;
+    color: #5e1d01;
+}
+
+.versiculo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4a1600 !important;
+}
+}
+
+
+
+/* IMAGEM */
+
+.secao-doce {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 5%;
+    gap: 40px;
+    background-color: #fff;
+}
+
+/* TEXTO */
+.conteudo-text {
+    flex: 1;
+    color: #5e1d01;
+    font-family: "Playfair Display", serif;
+}
+
+.conteudo-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.vers {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #4a1600;
+}
+
+/* IMAGEM */
+.conteudo-imagem {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.conteudo-imagem img {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+.imagem {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    float: left;
+    margin-right: 10px;
+}
+
+.imagem img {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.footer {
+    background: #4a1600;
+    color: #f7e9e9;
+
+    padding: 50px 8% 25px;
+    margin-top: 60px;
+    font-family: "Playfair Display", serif;
+
+    width: 95vw;
+    /* largura real da tela */
+    margin-left: calc(50% - 50vw);
+    /* remove limitação do container */
+
+
+}
+
+.footer-caixa {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+
+}
+
+.footer-logo h3 {
+    font-size: 26px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.footer-logo p {
+    font-size: 15px;
+    opacity: 0.9;
+}
+
+.footer-links h4,
+.footer-contato h4,
+.footer-social h4 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 8px;
+}
+
+.footer-links ul li a {
+    color: #f7e9e9;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-links ul li a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.footer-contato p {
+    margin-bottom: 6px;
+    font-size: 15px;
+}
+
+.social-icons a {
+    color: #f7e9e9;
+    font-size: 20px;
+    margin-right: 12px;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    color: #fff;
+}
+
+.footer-copy {
+    text-align: center;
+    margin-top: 35px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+
+
+
+
+/* =====================================================
+  Responsividade (para telas menores)
+  =====================================================
+*/
+@media (max-width: 768px) {
+
+    /* Esconde os links do desktop */
+    .nav-links {
+        display: none;
+    }
+
+    /* Mostra o ícone de menu */
+    .menu-icon {
+        display: block;
+    }
+}
+
+.secao-doce {
+
+    text-align: center;
+}
+
+.conteudo-texto {
+    text-align: center;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .social-icons a {
+        margin: 0 8px;
+    }
+}/* 📱 RESPONSIVO */
+@media (max-width: 768px) {
+    .secao-1 {
+        padding: 50px 5%;
+        text-align: center;
+    }
+
+    .conteudo-texto p {
+        font-size: 1.15rem;
+    }
+}

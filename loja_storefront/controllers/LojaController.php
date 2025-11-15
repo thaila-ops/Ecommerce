@@ -1,4 +1,3 @@
-git add .
 <?php
 // CONTROLADOR (Controller)
 // Responsável pela lógica da Loja

@@ -1,30 +1,43 @@
-/* CSS Básico para o Admin Dashboard */
-/* Este arquivo é idêntico ao anterior */
+/* ===========================================
+   ESTILO GLOBAL
+   =========================================== */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #474747;
     margin: 0;
     padding: 0;
-    color: #333;
+    font-family: "Playfair Display", serif;
+    background-color: #f4ebe5; /* bege claro delicado */
+    color: #4a1600;
 }
 
+/* ===========================================
+   CONTAINER PRINCIPAL
+   =========================================== */
 .container {
     max-width: 960px;
-    margin: 20px auto;
+    margin: 40px auto;
     background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    overflow: hidden;
+    border-radius: 18px;
+    padding-bottom: 20px;
+
+    box-shadow: 0 6px 20px rgba(0,0,0,0.10);
 }
 
+
+/* ===========================================
+   HEADER
+   =========================================== */
 header {
-    background-color: #333;
+    background: linear-gradient(90deg, #c58a63, #8a4a23);
+    padding: 25px 20px;
+    border-radius: 18px 18px 0 0;
     color: #fff;
-    padding: 20px;
+    text-align: center;
 }
 
 header h1 {
     margin: 0;
+    font-size: 2rem;
+    letter-spacing: 2px;
 }
 
 header h1 a {
@@ -32,36 +45,55 @@ header h1 a {
     text-decoration: none;
 }
 
+
+/* ===========================================
+   NAVBAR
+   =========================================== */
 nav {
-    background-color: #555;
-    padding: 10px 20px;
+    background-color: #f4ebe5;
+    padding: 12px 25px;
+    border-bottom: 2px solid #e2c7b8;
+    text-align: center;
 }
 
 nav a {
-    color: #fff;
+    color: #8a4a23;
     text-decoration: none;
-    padding: 10px 15px;
+    padding: 10px 18px;
     display: inline-block;
+
+    font-weight: bold;
+    border-radius: 8px;
+    transition: 0.3s ease;
 }
 
-nav a:hover, nav a.active {
-    background-color: #333;
-    border-radius: 4px;
+nav a:hover,
+nav a.active {
+    background-color: #f1d7c8;
+    color: #4a1600;
 }
 
+
+/* ===========================================
+   CONTEÚDO
+   =========================================== */
 main {
-    padding: 20px;
+    padding: 25px 35px;
 }
 
-/* Formulários */
+
+/* ===========================================
+   FORMULÁRIOS
+   =========================================== */
 .admin-form .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 18px;
 }
 
 .admin-form label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     font-weight: bold;
+    color: #4a1600;
 }
 
 .admin-form input[type="text"],
@@ -69,58 +101,91 @@ main {
 .admin-form textarea,
 .admin-form select {
     width: 100%;
-    padding: 8px;
-    box-sizing: border-box; /* para o padding não estourar o layout */
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 10px 12px;
+
+    border: 1px solid #d4b8a8;
+    border-radius: 10px;
+    background-color: #fff;
+
+    font-family: "Playfair Display", serif;
+    font-size: 1rem;
+
+    transition: border 0.3s ease;
+}
+
+.admin-form input:focus,
+.admin-form textarea:focus,
+.admin-form select:focus {
+    border-color: #c58a63;
+    outline: none;
 }
 
 .admin-form textarea {
-    min-height: 100px;
+    min-height: 110px;
     resize: vertical;
 }
 
+
+/* ===========================================
+   BOTÕES
+   =========================================== */
 .btn {
-    background-color: #007bff;
+    background: linear-gradient(90deg, #c58a63, #8a4a23);
     color: #fff;
-    padding: 10px 20px;
+
+    padding: 12px 24px;
     border: none;
-    border-radius: 4px;
+    border-radius: 12px;
+
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: "Playfair Display", serif;
+
+    transition: 0.3s ease;
 }
 
 .btn:hover {
-    background-color: #0056b3;
+    opacity: 0.85;
 }
 
-/* Mensagens */
+
+/* ===========================================
+   MENSAGENS
+   =========================================== */
+.erro,
+.sucesso {
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
 .erro {
-    color: #d8000c;
-    background-color: #ffbaba;
-    border: 1px solid #d8000c;
-    padding: 10px;
-    border-radius: 4px;
+    background-color: #ffcece;
+    border-left: 5px solid #d8000c;
+    color: #7a0000;
 }
 
 .sucesso {
-    color: #270;
-    background-color: #dff2bf;
-    border: 1px solid #270;
-    padding: 10px;
-    border-radius: 4px;
+    background-color: #daffd8;
+    border-left: 5px solid #2f6b1f;
+    color: #2f6b1f;
 }
 
-/* Lista de Itens */
+
+/* ===========================================
+   LISTA DE ITENS
+   =========================================== */
 .lista-itens ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 .lista-itens li {
-    background-color: #eee;
-    padding: 10px;
-    border: 1px solid #ddd;
-    margin-bottom: 5px;
-    border-radius: 4px;
+    background-color: #f7eee9;
+    padding: 12px 15px;
+
+    border: 1px so
 }
