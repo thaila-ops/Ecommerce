@@ -7,6 +7,9 @@
 <html lang="pt-br">
 
 <head>
+
+<base href="/Ecommerce/">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nossa Loja</title>
@@ -25,6 +28,8 @@
 
     <?php include 'includes/navbar.phtml'; ?>
 
+$pagina = $_GET["pagina"] ?? "home";
+include "paginas/$pagina.php";
 
 
        <section class="secao-1">

@@ -143,6 +143,64 @@ header h1 {
 }
 
 
+
+.titulo-doceria {
+    font-family: "Playfair Display", serif;
+    font-size: 2.6rem;
+    color: #4a1600;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 30px !important;
+    /* espaçamento entre letras */
+   
+    /* espaço embaixo */
+    text-align: center;
+}
+
+
+.secao-1 {
+    position: relative;
+    width: 100%;
+    min-height: 610px;
+
+    background-image: url("../Imagens_Teste/ChatGPTImage14_11_2025,23_53_55.png");
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.3);
+
+    padding: 20px 2%;
+    color: #fff;
+
+    /* 🎨 Máscara apenas no rodapé da imagem */
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 30%);
+    mask-image: linear-gradient(to top, transparent 0%, black 30%);
+
+
+
+
+.conteudo-texto {
+    position: relative;
+    /* sobe para cima da imagem e do overlay */
+    z-index: 2;
+    max-width: 630px;
+    font-family: "Playfair Display", serif;
+}
+
+.conteudo-texto p {
+    font-size: 1.3rem !important;
+    line-height: 1.8 !important;
+    color: #5e1d01;
+}
+
+.versiculo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4a1600 !important;
+}
+}
+
+
 /* Estilos da Barra de Navegação */
 .navbar {
     background-color: #ffffff;
@@ -234,64 +292,6 @@ header h1 {
     margin: 5px 0;
     transition: 0.4s;
 }
-
-.titulo-doceria {
-    font-family: "Playfair Display", serif;
-    font-size: 2.6rem;
-    color: #4a1600;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    margin-bottom: 30px !important;
-    /* espaçamento entre letras */
-   
-    /* espaço embaixo */
-    text-align: center;
-}
-
-
-.secao-1 {
-    position: relative;
-    width: 100%;
-    min-height: 610px;
-
-    background-image: url("../Imagens_Teste/ChatGPTImage14_11_2025,23_53_55.png");
-    background-size: cover;
-    background-position: center right;
-    background-repeat: no-repeat;
-    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.3);
-
-    padding: 20px 2%;
-    color: #fff;
-
-    /* 🎨 Máscara apenas no rodapé da imagem */
-    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 30%);
-    mask-image: linear-gradient(to top, transparent 0%, black 30%);
-
-
-
-
-.conteudo-texto {
-    position: relative;
-    /* sobe para cima da imagem e do overlay */
-    z-index: 2;
-    max-width: 630px;
-    font-family: "Playfair Display", serif;
-}
-
-.conteudo-texto p {
-    font-size: 1.3rem !important;
-    line-height: 1.8 !important;
-    color: #5e1d01;
-}
-
-.versiculo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #4a1600 !important;
-}
-}
-
-
 
 /* IMAGEM */
 
@@ -443,6 +443,96 @@ header h1 {
     opacity: 0.8;
 }
 
+/* ===== Fundo ===== */
+.login-body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffe6f2, #fff5fb);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+}
+
+/* ===== Caixa de Login ===== */
+.login-container {
+    background: #ffffffcc;
+    backdrop-filter: blur(6px);
+    border-radius: 20px;
+    padding: 40px 50px;
+    width: 380px;
+    box-shadow: 0 10px 25px rgba(255, 126, 180, 0.25);
+    text-align: center;
+}
+
+/* ===== Título ===== */
+.login-title {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #c24d7e;
+    font-weight: 600;
+}
+
+/* ===== Erro de Login ===== */
+.login-error {
+    background: #ffe1e7;
+    border: 1px solid #ff6f9a;
+    color: #c80042;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* ===== Inputs ===== */
+.input-group {
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    font-size: 0.9rem;
+    color: #a83b6e;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #f5bfd7;
+    border-radius: 10px;
+    font-size: 1rem;
+    background: #fff;
+    transition: 0.2s;
+}
+
+.input-group input:focus {
+    border-color: #ff88bb;
+    box-shadow: 0 0 8px rgba(255, 136, 187, 0.3);
+    outline: none;
+}
+
+/* ===== Botão ===== */
+.login-btn {
+    width: 100%;
+    background: #ff8aba;
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-top: 10px;
+}
+
+.login-btn:hover {
+    background: #ff74ad;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 126, 180, 0.4);
+}
 
 
 
