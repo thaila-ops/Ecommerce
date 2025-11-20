@@ -1,6 +1,5 @@
 <?php
-// MODELO (Model)
-// Responsável por TODAS as interações com a tabela `categorias`
+// models/CategoriaModel.php
 
 require_once 'Database.php';
 
@@ -9,42 +8,53 @@ class CategoriaModel {
     private $db;
 
     public function __construct() {
-        // Pega a conexão do banco de dados
         $this->db = Database::getConnection();
     }
 
-    /**
-     * Busca todas as categorias no banco
-     * @return array - Lista de categorias
-     */
     public function getAll() {
-        $sql = "SELECT id, nome FROM categorias";
+        // Agora pegamos também o status 'ativo'
+        $sql = "SELECT id, nome, ativo FROM categorias";
         $result = $this->db->query($sql);
-        
-        // Retorna todos os resultados como um array associativo
         return $result->fetch_all(MYSQLI_ASSOC); 
     }
 
-    /**
-     * Cria uma nova categoria
-     * @param string $nome - O nome da nova categoria
-     * @return bool - true se sucesso, false se falha
-     */
-    public function create($nome) {
-        // Prepara um statement para evitar SQL Injection
-        $sql = "INSERT INTO categorias (nome) VALUES (?)";
-        
+    public function getById($id) {
+        $sql = "SELECT id, nome, ativo FROM categorias WHERE id = ?";
         if ($stmt = $this->db->prepare($sql)) {
-            // "s" significa que o parâmetro é uma string
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_assoc();
+        }
+        return null;
+    }
+
+    public function create($nome) {
+        $sql = "INSERT INTO categorias (nome, ativo) VALUES (?, 1)";
+        if ($stmt = $this->db->prepare($sql)) {
             $stmt->bind_param("s", $nome);
-            
             if ($stmt->execute()) {
-                $stmt->close();
                 return true;
             }
         }
-        // Se algo falhar
-        $stmt->close();
+        return false;
+    }
+
+    public function update($id, $nome, $ativo) {
+        $sql = "UPDATE categorias SET nome = ?, ativo = ? WHERE id = ?";
+        if ($stmt = $this->db->prepare($sql)) {
+            $stmt->bind_param("sii", $nome, $ativo, $id);
+            return $stmt->execute();
+        }
+        return false;
+    }
+
+    public function delete($id) {
+        $sql = "DELETE FROM categorias WHERE id = ?";
+        if ($stmt = $this->db->prepare($sql)) {
+            $stmt->bind_param("i", $id);
+            return $stmt->execute();
+        }
         return false;
     }
 }

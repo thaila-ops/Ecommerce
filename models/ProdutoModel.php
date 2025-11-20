@@ -1,7 +1,5 @@
 <?php
-// MODELO (Model)
-// Responsável por TODAS as interações com a tabela `produtos`
-
+// models/ProdutoModel.php
 require_once 'Database.php';
 
 class ProdutoModel {
@@ -12,50 +10,52 @@ class ProdutoModel {
         $this->db = Database::getConnection();
     }
 
-    /**
-     * Busca todos os produtos, já com o nome da categoria (JOIN)
-     * @return array - Lista de produtos
-     */
     public function getAllWithCategoria() {
-        $sql = "SELECT 
-                    p.id, 
-                    p.nome, 
-                    p.descricao,
-                    p.preco, 
-                    p.imagem_nome,
-                    c.nome AS categoria_nome 
+        // Adicionado campo 'ativo'
+        $sql = "SELECT p.*, c.nome AS categoria_nome 
                 FROM produtos p
                 JOIN categorias c ON p.categoria_id = c.id
-                ORDER BY c.nome, p.nome";
-        
+                ORDER BY p.id DESC"; // Mais recentes primeiro
         $result = $this->db->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    /**
-     * Cria um novo produto
-     * @param string $nome
-     * @param string $descricao
-     * @param float $preco
-     * @param int $categoria_id
-     * @param string $imagem_nome - Apenas o nome do arquivo
-     * @return bool - true se sucesso, false se falha
-     */
-    public function create($nome, $descricao, $preco, $categoria_id, $imagem_nome) {
-        
-        $sql = "INSERT INTO produtos (nome, descricao, preco, categoria_id, imagem_nome) 
-                VALUES (?, ?, ?, ?, ?)";
-        
+    // Busca dados de um produto específico para edição
+    public function getById($id) {
+        $sql = "SELECT * FROM produtos WHERE id = ?";
         if ($stmt = $this->db->prepare($sql)) {
-            // s = string, d = double (decimal), i = integer
-            $stmt->bind_param("ssdis", $nome, $descricao, $preco, $categoria_id, $imagem_nome);
-            
-            if ($stmt->execute()) {
-                $stmt->close();
-                return true;
-            }
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_assoc();
         }
-        $stmt->close();
+        return null;
+    }
+
+    public function create($nome, $descricao, $preco, $categoria_id, $imagem_nome) {
+        $sql = "INSERT INTO produtos (nome, descricao, preco, categoria_id, imagem_nome, ativo) VALUES (?, ?, ?, ?, ?, 1)";
+        if ($stmt = $this->db->prepare($sql)) {
+            $stmt->bind_param("ssdis", $nome, $descricao, $preco, $categoria_id, $imagem_nome);
+            return $stmt->execute();
+        }
+        return false;
+    }
+
+    public function update($id, $nome, $descricao, $preco, $categoria_id, $imagem_nome, $ativo) {
+        $sql = "UPDATE produtos SET nome=?, descricao=?, preco=?, categoria_id=?, imagem_nome=?, ativo=? WHERE id=?";
+        if ($stmt = $this->db->prepare($sql)) {
+            $stmt->bind_param("ssdisii", $nome, $descricao, $preco, $categoria_id, $imagem_nome, $ativo, $id);
+            return $stmt->execute();
+        }
+        return false;
+    }
+
+    public function delete($id) {
+        $sql = "DELETE FROM produtos WHERE id = ?";
+        if ($stmt = $this->db->prepare($sql)) {
+            $stmt->bind_param("i", $id);
+            return $stmt->execute();
+        }
         return false;
     }
 }

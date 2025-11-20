@@ -27,5 +27,8 @@
                class="<?php echo ($action_atual == 'produtos') ? 'active' : ''; ?>">
                Gerenciar Produtos
             </a>
+            
+            <!-- Link de Sair adicionado aqui -->
+            <a href="logout.php" style="float: right; color: red;">Sair</a>
         </nav>
         <main>

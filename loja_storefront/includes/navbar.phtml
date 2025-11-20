@@ -1,27 +1,28 @@
-<!-- A barra de navegação -->
 <nav class="navbar">
     <div class="navbar-container">
-
-        <!-- Logo e Título do Site -->
-        <a href="index.php" class="logo">
-            <img src="imagens/logo.png"
-                 alt="Logo"
-                 class="logo-img"
+        <a href="/ecommerce-main/loja_storefront/index.php" class="logo">
+            <img src="/ecommerce-main/loja_storefront/imagens/logo.png" alt="Logo" class="logo-img"
                  onerror="this.onerror=null; this.src='https://placehold.co/64x64/6366f1/white?text=Logo';">
         </a>
-<ul class="nav-links">
-  <li><a href="index.php">Início</a></li>
-  <li><a href="public/carrinho.php">Carrinho</a></li>
-  <li><a href="public/contato.php">Contato</a></li>
-  <li><a href="public/login.php">Login</a></li>
-</ul>
 
-        <!-- Botão de Menu (Mobile) -->
+        <ul class="nav-links">
+            <li><a href="/ecommerce-main/loja_storefront/index.php">Início</a></li>
+            <li><a href="/ecommerce-main/public/carrinho.php">Carrinho</a></li>
+            <li><a href="/ecommerce-main/public/contato.php">Contato</a></li>
+            
+            <!-- LÓGICA DE LOGIN -->
+            <?php if (isset($_SESSION['cliente_id'])): ?>
+                <li>
+                    <span style="color: #4a1600; font-weight:bold;">Olá, <?php echo htmlspecialchars($_SESSION['cliente_nome']); ?></span>
+                </li>
+                <li><a href="/ecommerce-main/loja_storefront/index.php?action=logout" style="color: red;">Sair</a></li>
+            <?php else: ?>
+                <li><a href="/ecommerce-main/loja_storefront/index.php?action=login">Login / Cadastro</a></li>
+            <?php endif; ?>
+        </ul>
+
         <div class="menu-icon">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
         </div>
-
     </div>
 </nav>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Alquimia III</title>
+    
+    <!-- 
+      CORREÇÃO DO CSS:
+      Usamos o caminho absoluto: /nome_da_pasta/caminho_do_arquivo 
+      Assim funciona de qualquer lugar.
+    -->
+    <link rel="stylesheet" href="/ecommerce-main/style.css/style.css">
+</head>
+<body class="login-body">
+
+    <?php 
+    // Include do PHP (Backend)
+    include __DIR__ . '/../includes/navbar.phtml'; 
+    ?>
+
+    <div class="login-container" style="margin-top: 50px;">
+        <h2 class="login-title">Entrar</h2>
+        
+        <?php if(isset($erro)): ?>
+            <p class="login-error"><?php echo $erro; ?></p>
+        <?php endif; ?>
+
+        <!-- Action aponta para o index da loja -->
+        <form action="/ecommerce-main/loja_storefront/index.php?action=processa_login" method="post">
+            <div class="input-group">
+                <label>E-mail</label>
+                <input type="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label>Senha</label>
+                <input type="password" name="password" required>
+            </div>
+            <button type="submit" class="login-btn">Entrar</button>
+        </form>
+        
+        <p style="margin-top: 20px; text-align: center;">
+            Não tem conta? <a href="/ecommerce-main/loja_storefront/index.php?action=cadastro" style="color: #c24d7e;">Cadastre-se aqui</a>
+        </p>
+    </div>
+</body>
+</html>

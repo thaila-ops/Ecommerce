@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro - Alquimia III</title>
+    
+    <!-- CSS com caminho absoluto -->
+    <link rel="stylesheet" href="/ecommerce-main/style.css/style.css">
+</head>
+<body class="login-body">
+
+    <?php 
+    include __DIR__ . '/../includes/navbar.phtml'; 
+    ?>
+
+    <div class="login-container" style="margin-top: 50px;">
+        <h2 class="login-title">Criar Conta</h2>
+        
+        <?php if(isset($erro)): ?>
+            <p class="login-error"><?php echo $erro; ?></p>
+        <?php endif; ?>
+
+        <form action="/ecommerce-main/loja_storefront/index.php?action=processa_cadastro" method="post">
+            <div class="input-group">
+                <label>Nome de Usuário</label>
+                <input type="text" name="username" required>
+            </div>
+            <div class="input-group">
+                <label>E-mail</label>
+                <input type="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label>Senha</label>
+                <input type="password" name="password" required>
+            </div>
+            <button type="submit" class="login-btn">Cadastrar</button>
+        </form>
+
+        <p style="margin-top: 20px; text-align: center;">
+            Já tem conta? <a href="/ecommerce-main/loja_storefront/index.php?action=login" style="color: #c24d7e;">Faça Login</a>
+        </p>
+    </div>
+</body>
+</html>
