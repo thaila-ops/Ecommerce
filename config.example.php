@@ -1,6 +1,11 @@
 <?php
 /*
  * Arquivo de configuração COMPARTILHADO.
+ * 
+ * INSTRUÇÕES:
+ * 1. Copie este arquivo para config.php
+ * 2. Preencha com suas credenciais reais
+ * 3. NUNCA faça commit do config.php no Git!
 */
 
 // --- CONFIGURE SEUS DADOS AQUI ---
@@ -28,3 +33,4 @@ define('MP_ACCESS_TOKEN', 'SEU_ACCESS_TOKEN_AQUI'); // Substitua pelo seu Access
 define('MP_LINK_PAGAMENTO', 'https://link.mercadopago.com.br/doceriaalquimia');
 
 ?>
+

@@ -60,9 +60,9 @@
 
                     // Verifica se imagem existe
                     if (!empty($row['imagem_nome']) && file_exists($caminho_fisico)) {
-                        echo '<img src="' . $caminho_imagem . '" alt="' . htmlspecialchars($row['nome']) . '">';
+                        echo '<img class="img-moldura thumb-produto" src="' . $caminho_imagem . '" alt="' . htmlspecialchars($row['nome']) . '">';
                     } else {
-                        echo '<img src="https://placehold.co/400x300?text=Sem+Imagem" alt="Sem imagem">';
+                        echo '<img class="img-moldura thumb-produto" src="https://placehold.co/400x300?text=Sem+Imagem" alt="Sem imagem">';
                     }
 
                     echo '<div class="card-body">';
@@ -70,6 +70,16 @@
                     echo '<h2>' . htmlspecialchars($row['nome']) . '</h2>';
                     echo '<p class="descricao">' . htmlspecialchars($row['descricao']) . '</p>';
                     echo '<p class="preco">R$ ' . number_format($row['preco'], 2, ',', '.') . '</p>';
+
+                    echo '<form class="form-adiciona-carrinho" method="post" action="/ecommerce-main/loja_storefront/index.php?action=add_carrinho">';
+                    echo '<input type="hidden" name="produto_id" value="' . (int) $row['id'] . '">';
+                    echo '<label>';
+                    echo '<span>Qtd.</span>';
+                    echo '<input type="number" min="1" name="quantidade" value="1">';
+                    echo '</label>';
+                    echo '<button type="submit"><i class="fa fa-cart-plus"></i> Adicionar</button>';
+                    echo '</form>';
+
                     echo '</div>'; // fim .card-body
                     
                     echo '</div>'; // fim .card-produto
@@ -84,7 +94,7 @@
     <section class="secao-doce">
         
         <div class="conteudo-imagem">
-            <img src="Imagens_Teste/Imagem do WhatsApp de 2025-11-13 à(s) 22.18.57_d103775a.jpg" alt="equipe da alquimia">
+            <img class="img-moldura img-sobre" src="Imagens_Teste/Imagem do WhatsApp de 2025-11-13 à(s) 22.18.57_d103775a.jpg" alt="equipe da alquimia">
         </div>
 
         <div class="conteudo-text">

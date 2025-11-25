@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <base href="/ecommerce-main/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seu Carrinho - Doceria Alquimia III</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css/style.css">
+</head>
+<body class="carrinho-body">
+    <?php include __DIR__ . '/../includes/navbar.phtml'; ?>
+
+    <main class="carrinho-container">
+        <header class="carrinho-header">
+            <div>
+                <p class="carrinho-subtitulo">Revise seus doces favoritos</p>
+                <h1>Meu Carrinho</h1>
+            </div>
+            <a class="btn-voltar-loja" href="/ecommerce-main/loja_storefront/index.php">
+                <i class="fa fa-arrow-left"></i>
+                Continuar comprando
+            </a>
+        </header>
+
+        <?php if (!empty($mensagem)): ?>
+            <div class="alerta-carrinho <?php echo $mensagem['tipo'] === 'erro' ? 'erro' : 'sucesso'; ?>">
+                <?php echo htmlspecialchars($mensagem['texto']); ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (empty($itens)): ?>
+            <section class="carrinho-vazio">
+                <i class="fa fa-shopping-basket"></i>
+                <h2>Seu carrinho está vazio</h2>
+                <p>Adicione alguns doces para deixar o dia mais especial.</p>
+                <a class="btn-primario" href="/ecommerce-main/loja_storefront/index.php">Explorar produtos</a>
+            </section>
+        <?php else: ?>
+            <section class="carrinho-conteudo">
+                <form class="carrinho-itens" method="post" action="/ecommerce-main/loja_storefront/index.php?action=atualiza_carrinho">
+                    <?php foreach ($itens as $item): ?>
+                        <article class="item-carrinho">
+                            <?php
+                                $imagem = 'https://placehold.co/120x120?text=Doceria';
+                                if (!empty($item['imagem_nome'])) {
+                                    $caminho = __DIR__ . '/../../uploads/' . $item['imagem_nome'];
+                                    if (file_exists($caminho)) {
+                                        $imagem = 'uploads/' . $item['imagem_nome'];
+                                    }
+                                }
+                            ?>
+                            <img class="img-moldura thumb-carrinho" src="<?php echo htmlspecialchars($imagem); ?>" alt="<?php echo htmlspecialchars($item['nome']); ?>">
+
+                            <div class="item-info">
+                                <h3><?php echo htmlspecialchars($item['nome']); ?></h3>
+                                <p class="item-preco">R$ <?php echo number_format($item['preco'], 2, ',', '.'); ?></p>
+
+                                <div class="item-acoes">
+                                    <label>
+                                        Quantidade
+                                        <input type="number" min="1" name="quantidades[<?php echo $item['id']; ?>]" value="<?php echo (int) $item['quantidade']; ?>">
+                                    </label>
+
+                                    <button
+                                        type="submit"
+                                        class="btn-link"
+                                        name="produto_id"
+                                        value="<?php echo (int) $item['id']; ?>"
+                                        formaction="/ecommerce-main/loja_storefront/index.php?action=remove_item_carrinho"
+                                        formmethod="post"
+                                    >
+                                        Remover
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="item-subtotal">
+                                <span>Subtotal</span>
+                                <strong>R$ <?php echo number_format($item['preco'] * $item['quantidade'], 2, ',', '.'); ?></strong>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+
+                    <div class="acoes-inferiores">
+                        <button type="submit" class="btn-secundario">Atualizar carrinho</button>
+                        <button
+                            type="submit"
+                            class="btn-link"
+                            formaction="/ecommerce-main/loja_storefront/index.php?action=limpa_carrinho"
+                            formmethod="post"
+                        >
+                            Esvaziar carrinho
+                        </button>
+                    </div>
+                </form>
+
+                <?php 
+                // Verifica se há Access Token (API) ou Link de Pagamento configurado
+                $temAccessToken = defined('MP_ACCESS_TOKEN') && !empty(MP_ACCESS_TOKEN) && stripos(MP_ACCESS_TOKEN, 'SEU_') !== 0;
+                $temLinkPagamento = defined('MP_LINK_PAGAMENTO') && !empty(MP_LINK_PAGAMENTO);
+                $pagamentoDisponivel = $temAccessToken || $temLinkPagamento;
+                $valorPreenchido = $temAccessToken; // Valor só será pré-preenchido se usar API
+                ?>
+                <aside class="resumo-carrinho">
+                    <h2>Resumo</h2>
+                    <ul>
+                        <?php foreach ($itens as $item): ?>
+                            <li>
+                                <span><?php echo htmlspecialchars($item['nome']); ?> x <?php echo (int) $item['quantidade']; ?></span>
+                                <strong>R$ <?php echo number_format($item['preco'] * $item['quantidade'], 2, ',', '.'); ?></strong>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <div class="resumo-total">
+                        <span>Total</span>
+                        <strong>R$ <?php echo number_format($total, 2, ',', '.'); ?></strong>
+                    </div>
+                    <?php if ($pagamentoDisponivel): ?>
+                        <form method="post" action="/ecommerce-main/loja_storefront/index.php?action=checkout_pagamento">
+                            <button class="btn-primario" type="submit">
+                                <i class="fa fa-credit-card"></i> Pagar R$ <?php echo number_format($total, 2, ',', '.'); ?> com Mercado Pago
+                            </button>
+                        </form>
+                        <?php if ($valorPreenchido): ?>
+                            <p class="texto-dica">O valor de <strong>R$ <?php echo number_format($total, 2, ',', '.'); ?></strong> será pré-preenchido automaticamente no checkout.</p>
+                        <?php else: ?>
+                            <p class="texto-dica">Você será direcionado ao link de pagamento. Por favor, insira o valor de <strong>R$ <?php echo number_format($total, 2, ',', '.'); ?></strong> manualmente.</p>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <button class="btn-primario" type="button" disabled>
+                            Configure o Mercado Pago para finalizar
+                        </button>
+                        <p class="texto-dica">Estamos preparando o checkout online. Enquanto isso, conclua o pedido pelo WhatsApp com nosso atendimento ❤️</p>
+                    <?php endif; ?>
+                </aside>
+            </section>
+        <?php endif; ?>
+    </main>
+
+    <?php include __DIR__ . '/../includes/footer.phtml'; ?>
+</body>
+</html>
+
