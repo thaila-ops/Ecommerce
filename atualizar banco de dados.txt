@@ -1,0 +1,32 @@
+-- Adiciona coluna de estoque nos produtos (Padrão 0)
+ALTER TABLE produtos ADD COLUMN estoque INT DEFAULT 0;
+
+-- Cria tabela de Clientes (já que só existia admin na tabela usuarios)
+CREATE TABLE IF NOT EXISTS clientes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Cria tabela de Pedidos
+CREATE TABLE IF NOT EXISTS pedidos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cliente_id INT NOT NULL,
+    data_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    total DECIMAL(10,2) NOT NULL,
+    status ENUM('pendente', 'pago', 'enviado', 'cancelado') DEFAULT 'pendente',
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+);
+
+-- Cria tabela de Itens do Pedido
+CREATE TABLE IF NOT EXISTS itens_pedido (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pedido_id INT NOT NULL,
+    produto_id INT NOT NULL,
+    quantidade INT NOT NULL,
+    preco_unitario DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
+    FOREIGN KEY (produto_id) REFERENCES produtos(id)
+);
