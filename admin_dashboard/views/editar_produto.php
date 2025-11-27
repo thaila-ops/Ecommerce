@@ -15,9 +15,17 @@ require_once 'template_header.php';
         <input type="text" name="nome_produto" value="<?php echo htmlspecialchars($produto['nome']); ?>" required>
     </div>
 
-    <div class="form-group">
-        <label>Preço:</label>
-        <input type="number" step="0.01" name="preco" value="<?php echo $produto['preco']; ?>" required>
+    <!-- Preço e Estoque lado a lado -->
+    <div style="display:flex; gap:10px;">
+        <div class="form-group" style="flex:1;">
+            <label>Preço:</label>
+            <input type="number" step="0.01" name="preco" value="<?php echo $produto['preco']; ?>" required>
+        </div>
+        <div class="form-group" style="flex:1;">
+            <label>Estoque:</label>
+            <!-- Carrega o valor atual do estoque -->
+            <input type="number" name="estoque" value="<?php echo isset($produto['estoque']) ? $produto['estoque'] : 0; ?>" required>
+        </div>
     </div>
 
     <div class="form-group">

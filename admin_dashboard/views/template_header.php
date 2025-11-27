@@ -19,6 +19,10 @@
             <?php // Define a classe 'active' com base na ação atual
                 $action_atual = $_GET['action'] ?? 'home';
             ?>
+            <a href="index.php?action=home" 
+               class="<?php echo ($action_atual == 'home') ? 'active' : ''; ?>">
+               Home
+            </a>
             <a href="index.php?action=categorias" 
                class="<?php echo ($action_atual == 'categorias') ? 'active' : ''; ?>">
                Gerenciar Categorias

@@ -24,7 +24,13 @@ require_once 'template_header.php';
     <summary style="cursor:pointer; padding:10px; background:#eee;">Clique para Adicionar Novo Produto</summary>
     <form action="index.php?action=add_produto" method="post" enctype="multipart/form-data" class="admin-form" style="margin-top:10px;">
         <div class="form-group"><label>Nome:</label><input type="text" name="nome_produto" required></div>
-        <div class="form-group"><label>Preço:</label><input type="number" step="0.01" name="preco" required></div>
+        
+        <!-- Campo Estoque Adicionado -->
+        <div style="display:flex; gap:10px;">
+            <div class="form-group" style="flex:1;"><label>Preço:</label><input type="number" step="0.01" name="preco" required></div>
+            <div class="form-group" style="flex:1;"><label>Estoque Inicial:</label><input type="number" name="estoque" value="0" required></div>
+        </div>
+
         <div class="form-group"><label>Categoria:</label>
             <select name="categoria_id" required>
                 <?php foreach ($categorias as $cat) echo "<option value='{$cat['id']}'>{$cat['nome']}</option>"; ?>
@@ -48,6 +54,7 @@ require_once 'template_header.php';
                     <th>Nome</th>
                     <th>Categoria</th>
                     <th>Preço</th>
+                    <th>Estoque</th> <!-- Coluna Nova -->
                     <th>Status</th>
                     <th>Ações</th>
                 </tr>
@@ -65,6 +72,15 @@ require_once 'template_header.php';
                     <td><?php echo htmlspecialchars($row['nome']); ?></td>
                     <td><?php echo htmlspecialchars($row['categoria_nome']); ?></td>
                     <td>R$ <?php echo number_format($row['preco'], 2, ',', '.'); ?></td>
+                    
+                    <!-- Exibe o Estoque -->
+                    <td>
+                        <?php 
+                            echo $row['estoque']; 
+                            if($row['estoque'] < 5) echo " <small style='color:red;'>(Baixo)</small>";
+                        ?>
+                    </td>
+
                     <td>
                         <?php echo ($row['ativo'] == 1) 
                             ? "<span class='status-ativo'>Ativo</span>" 

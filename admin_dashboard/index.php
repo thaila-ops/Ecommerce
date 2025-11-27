@@ -3,16 +3,17 @@
 session_start();
 
 // --- BLOCO DE SEGURANÇA ---
-// Se não tiver o ID do usuário na sessão, manda pro login
 if (!isset($_SESSION['usuario_id'])) {
     header('Location: views/login.php');
-    exit; // Para tudo aqui
+    exit; 
 }
 // --------------------------
 
 require_once '../config.php';
+// Inclui os controllers necessários
 require_once 'controllers/CategoriaController.php';
 require_once 'controllers/ProdutoController.php';
+require_once 'controllers/DashboardController.php'; // Incluído o novo controller
 
 $action = $_GET['action'] ?? 'home';
 
@@ -61,10 +62,12 @@ switch ($action) {
         $controller->excluir();
         break;
 
-    // ---- HOME ----
+    // ---- HOME (DASHBOARD) ----
     case 'home':
     default:
-        require 'views/home.php';
+        // Agora chamamos o controller em vez de incluir a view direto
+        $controller = new DashboardController();
+        $controller->index();
         break;
 }
 ?>

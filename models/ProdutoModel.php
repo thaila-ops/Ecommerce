@@ -11,11 +11,11 @@ class ProdutoModel {
     }
 
     public function getAllWithCategoria() {
-        // Adicionado campo 'ativo'
+        // Seleciona tudo (p.*), o que agora inclui a coluna 'estoque'
         $sql = "SELECT p.*, c.nome AS categoria_nome 
                 FROM produtos p
                 JOIN categorias c ON p.categoria_id = c.id
-                ORDER BY p.id DESC"; // Mais recentes primeiro
+                ORDER BY p.id DESC"; 
         $result = $this->db->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
@@ -32,19 +32,27 @@ class ProdutoModel {
         return null;
     }
 
-    public function create($nome, $descricao, $preco, $categoria_id, $imagem_nome) {
-        $sql = "INSERT INTO produtos (nome, descricao, preco, categoria_id, imagem_nome, ativo) VALUES (?, ?, ?, ?, ?, 1)";
+    // --- ATUALIZADO: Recebe $estoque ---
+    public function create($nome, $descricao, $preco, $estoque, $categoria_id, $imagem_nome) {
+        // Adicionado campo estoque no INSERT
+        $sql = "INSERT INTO produtos (nome, descricao, preco, estoque, categoria_id, imagem_nome, ativo) VALUES (?, ?, ?, ?, ?, ?, 1)";
+        
         if ($stmt = $this->db->prepare($sql)) {
-            $stmt->bind_param("ssdis", $nome, $descricao, $preco, $categoria_id, $imagem_nome);
+            // Tipos: s=string, s=string, d=double, i=integer (estoque), i=integer (cat), s=string
+            $stmt->bind_param("ssdiis", $nome, $descricao, $preco, $estoque, $categoria_id, $imagem_nome);
             return $stmt->execute();
         }
         return false;
     }
 
-    public function update($id, $nome, $descricao, $preco, $categoria_id, $imagem_nome, $ativo) {
-        $sql = "UPDATE produtos SET nome=?, descricao=?, preco=?, categoria_id=?, imagem_nome=?, ativo=? WHERE id=?";
+    // --- ATUALIZADO: Recebe $estoque ---
+    public function update($id, $nome, $descricao, $preco, $estoque, $categoria_id, $imagem_nome, $ativo) {
+        // Adicionado campo estoque no UPDATE
+        $sql = "UPDATE produtos SET nome=?, descricao=?, preco=?, estoque=?, categoria_id=?, imagem_nome=?, ativo=? WHERE id=?";
+        
         if ($stmt = $this->db->prepare($sql)) {
-            $stmt->bind_param("ssdisii", $nome, $descricao, $preco, $categoria_id, $imagem_nome, $ativo, $id);
+            // Tipos: s, s, d, i (estoque), i, s, i, i (id no final)
+            $stmt->bind_param("ssdiisii", $nome, $descricao, $preco, $estoque, $categoria_id, $imagem_nome, $ativo, $id);
             return $stmt->execute();
         }
         return false;

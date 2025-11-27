@@ -28,6 +28,8 @@ class ProdutoController {
             $nome = trim($_POST["nome_produto"]);
             $descricao = trim($_POST["descricao"]);
             $preco = floatval($_POST["preco"]);
+            // Adicionado campo Estoque (se não vier, assume 0)
+            $estoque = isset($_POST["estoque"]) ? intval($_POST["estoque"]) : 0;
             $categoria_id = intval($_POST["categoria_id"]);
             
             // Lógica de Upload da Imagem
@@ -49,7 +51,8 @@ class ProdutoController {
             }
 
             $model = new ProdutoModel();
-            if ($model->create($nome, $descricao, $preco, $categoria_id, $imagem_nome)) {
+            // ATENÇÃO: O Model precisará ser atualizado para receber $estoque
+            if ($model->create($nome, $descricao, $preco, $estoque, $categoria_id, $imagem_nome)) {
                 $_SESSION['mensagem'] = "<p class='sucesso'>Produto cadastrado com sucesso!</p>";
             } else {
                 $_SESSION['mensagem'] = "<p class='erro'>Erro ao salvar no banco de dados.</p>";
@@ -89,6 +92,8 @@ class ProdutoController {
             $nome = trim($_POST['nome_produto']);
             $descricao = trim($_POST['descricao']);
             $preco = floatval($_POST['preco']);
+            // Adicionado campo Estoque
+            $estoque = intval($_POST['estoque']);
             $categoria_id = intval($_POST['categoria_id']);
             $ativo = isset($_POST['ativo']) ? 1 : 0;
             
@@ -110,7 +115,8 @@ class ProdutoController {
             }
 
             $model = new ProdutoModel();
-            if ($model->update($id, $nome, $descricao, $preco, $categoria_id, $imagem_final, $ativo)) {
+            // ATENÇÃO: O Model precisará ser atualizado para receber $estoque
+            if ($model->update($id, $nome, $descricao, $preco, $estoque, $categoria_id, $imagem_final, $ativo)) {
                 $_SESSION['mensagem'] = "<p class='sucesso'>Produto atualizado!</p>";
             } else {
                 $_SESSION['mensagem'] = "<p class='erro'>Erro ao atualizar.</p>";
